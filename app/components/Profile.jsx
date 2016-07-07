@@ -46,7 +46,6 @@ class Profile extends React.Component {
       .then((data) => {
         console.log('-- response');
         console.log(data);
-        console.log(this);
         this.setState({
           bios: data.bios,
           repos: data.repos

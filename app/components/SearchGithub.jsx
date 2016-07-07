@@ -5,8 +5,6 @@ class SearchGithub extends React.Component {
     super(props);
     this.input = null;
 
-    console.log(context);
-
     this.getRef = (ref) => this._getRef(ref);
     this.handleSubmit = () => this._handleSubmit();
   }
