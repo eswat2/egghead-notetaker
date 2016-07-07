@@ -2,10 +2,10 @@ import React from 'react';
 
 class Repos extends React.Component {
   render() {
+    console.log(`-- Repos:  ${this.props.repos}`);
     return (
       <div>
         <p>REPOSSS</p>
-        <p>{this.props.repos}</p>
       </div>
     )
   }
