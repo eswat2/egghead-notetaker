@@ -4,13 +4,16 @@ class AddNote extends React.Component {
   constructor() {
     super();
     this.input = null;
+
+    this.setRef = (ref) => this._setRef(ref);
+    this.handleSubmit = () => this._handleSubmit();
   }
 
-  setRef(ref) {
+  _setRef(ref) {
     this.input = ref;
   }
 
-  handleSubmit() {
+  _handleSubmit() {
     let newNote = this.input.value;
     this.input.value = '';
     this.props.addNote(newNote);
@@ -23,13 +26,13 @@ class AddNote extends React.Component {
           type="text"
           className="form-control"
           placeholder=""
-          ref={this.setRef.bind(this)}
+          ref={this.setRef}
           />
         <span className="input-group-btn">
           <button
             className="btn btn-default"
             type="button"
-            onClick={this.handleSubmit.bind(this)}
+            onClick={this.handleSubmit}
             >
             Submit
           </button>
