@@ -21,16 +21,28 @@ class Profile extends React.Component {
     };
 
     this.handleAddNote = (newNote) => this._handleAddNote(newNote);
+    this.init = (username) => this._init(username);
   }
 
   componentDidMount() {
     // hooks to bind go here
     console.log('-- componentDidMount:  Profile');
+    this.init(this.props.params.username);
+  }
 
-    let userRef = db.notesRef.child(this.props.params.username);
+  componentWillReceiveProps(nextProps) {
+    console.log('-- nextProps:')
+    console.log(nextProps);
+
+    this.unbind('notes');
+    this.init(nextProps.params.username);
+  }
+
+  _init(username) {
+    let userRef = db.notesRef.child(username);
     this.bindAsArray(userRef, 'notes');
 
-    helpers.getGithubInfo(this.props.params.username)
+    helpers.getGithubInfo(username)
       .then((data) => {
         console.log('-- response');
         console.log(data);
