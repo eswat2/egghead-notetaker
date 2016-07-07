@@ -15,9 +15,15 @@ class Profile extends React.Component {
     list.push({value:'another'});
     list.push({value:'ratrod'});
 
-    this.notes = list;
-    this.bios = { name: 'Richard Hess' };
-    this.repos = [ 1,2,3,4,5 ];
+    const notes = list;
+    const bios = { name: 'Richard Hess' };
+    const repos = [ 1,2,3,4,5 ];
+
+    this.state = {
+      notes: notes,
+      bios: bios,
+      repos: repos
+    };
   }
 
   componentDidMount() {
@@ -29,17 +35,27 @@ class Profile extends React.Component {
     // hooks to unbind go here
   }
 
+  handleAddNote(newNote) {
+    // update firebase with the new notes
+    let list = [ ...this.state.notes, { value:newNote } ];
+    this.setState({notes:list});
+  }
+
   render() {
     return (
     <div className="row">
       <div className="col-md-4">
-        <UserProfile username={this.props.params.username} bios={this.bios} />
+        <UserProfile username={this.props.params.username} bios={this.state.bios} />
       </div>
       <div className="col-md-4">
-        <Repos username={this.props.params.username} repos={this.repos} />
+        <Repos username={this.props.params.username} repos={this.state.repos} />
       </div>
       <div className="col-md-4">
-        <Notes username={this.props.params.username} notes={this.notes} />
+        <Notes
+          username={this.props.params.username}
+          notes={this.state.notes}
+          addNote={this.handleAddNote.bind(this)}
+          />
       </div>
     </div>
     );
