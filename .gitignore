@@ -1,3 +1,6 @@
+# Private Firebase configuration
+app/utils/firebase.jsx
+
 # Logs
 logs
 *.log

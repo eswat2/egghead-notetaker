@@ -3,26 +3,21 @@ import Router from 'react-router';
 import Repos from './Github/Repos.jsx';
 import UserProfile from './Github/UserProfile.jsx';
 import Notes from './Notes/Notes.jsx';
+import helpers from '../utils/helpers.jsx';
+
+import db from '../utils/firebase.jsx';
+import reactMixin from 'react-mixin';
+import ReactFireMixin from 'reactfire';
 
 class Profile extends React.Component {
 
   constructor() {
     super();
 
-    let list = [];
-    list.push({value:'awesome'});
-    list.push({value:'foobar'});
-    list.push({value:'another'});
-    list.push({value:'ratrod'});
-
-    const notes = list;
-    const bios = { name: 'Richard Hess' };
-    const repos = [ 1,2,3,4,5 ];
-
     this.state = {
-      notes: notes,
-      bios: bios,
-      repos: repos
+      notes: [],
+      bios: {},
+      repos: []
     };
 
     this.handleAddNote = (newNote) => this._handleAddNote(newNote);
@@ -30,17 +25,34 @@ class Profile extends React.Component {
 
   componentDidMount() {
     // hooks to bind go here
-    console.log('-- componentDidMount:  Profile')
+    console.log('-- componentDidMount:  Profile');
+
+    let userRef = db.notesRef.child(this.props.params.username);
+    this.bindAsArray(userRef, 'notes');
+
+    helpers.getGithubInfo(this.props.params.username)
+      .then((data) => {
+        console.log('-- response');
+        console.log(data);
+        console.log(this);
+        this.setState({
+          bios: data.bios,
+          repos: data.repos
+        })
+      });
   }
 
   componentWillUnmount() {
     // hooks to unbind go here
+    this.unbind('notes');
   }
 
   _handleAddNote(newNote) {
     // update firebase with the new notes
-    let list = [ ...this.state.notes, { value:newNote } ];
-    this.setState({notes:list});
+    // let list = [ ...this.state.notes, { value:newNote } ];
+    // this.setState({notes:list});
+    let userRef = db.notesRef.child(this.props.params.username);
+    userRef.push(newNote);
   }
 
   render() {
@@ -63,5 +75,7 @@ class Profile extends React.Component {
     );
   }
 }
+
+reactMixin(Profile.prototype, ReactFireMixin);
 
 export default Profile;

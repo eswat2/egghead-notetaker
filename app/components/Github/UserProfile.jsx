@@ -2,6 +2,7 @@ import React from 'react';
 
 class UserProfile extends React.Component {
   render() {
+    console.log(`-- UserProfile:  ${this.props.bios}`)
     return (
       <div>
         <p>USER PROFILE</p>

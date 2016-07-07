@@ -4,6 +4,8 @@ import AddNote from './AddNote.jsx';
 
 class Notes extends React.Component {
   render() {
+    console.log('-- Notes');
+    console.log(this.props.notes);
     return (
       <div>
         <h3>Notes for {this.props.username} </h3>
