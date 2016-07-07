@@ -2,7 +2,6 @@ import React from 'react';
 
 class Repos extends React.Component {
   render() {
-    console.log(`-- Repos:  ${this.props.repos}`);
     let repos = this.props.repos.map(function(repo,index){
       return (
         <li className="list-group-item" key={index}>
