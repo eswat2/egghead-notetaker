@@ -3,7 +3,7 @@ import Router from 'react-router';
 import Repos from './Github/Repos.jsx';
 import UserProfile from './Github/UserProfile.jsx';
 import Notes from './Notes/Notes.jsx';
-import helpers from '../utils/helpers.jsx';
+import getGithubInfo from '../utils/helpers.jsx';
 
 import db from '../utils/firebase.jsx';
 import reactMixin from 'react-mixin';
@@ -42,7 +42,7 @@ class Profile extends React.Component {
     let userRef = db.notesRef.child(username);
     this.bindAsArray(userRef, 'notes');
 
-    helpers.getGithubInfo(username)
+    getGithubInfo(username)
       .then((data) => {
         console.log('-- response');
         console.log(data);
