@@ -9,3 +9,5 @@ working directory for the Egghead.io class on creating a React application, but 
 npm install
 npm start
 ```
+
+visit this [URL(localhost:3333)](http://localhost:3333) to see the app...

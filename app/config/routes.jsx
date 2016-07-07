@@ -1,5 +1,6 @@
 import Home from '../components/Home.jsx';
 import Main from '../components/Main.jsx';
+import Profile from "../components/Profile.jsx";
 
 // const routes = () => (
 //   <Route path="/" component={Main}>
@@ -15,7 +16,7 @@ const routes = {
   component: Main,
   indexRoute: { component: Home },
   childRoutes: [
-    
+    { path: 'profile/:username', component: Profile }
   ]
 };
 
