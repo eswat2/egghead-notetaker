@@ -24,6 +24,8 @@ class Profile extends React.Component {
       bios: bios,
       repos: repos
     };
+
+    this.handleAddNote = (newNote) => this._handleAddNote(newNote);
   }
 
   componentDidMount() {
@@ -35,7 +37,7 @@ class Profile extends React.Component {
     // hooks to unbind go here
   }
 
-  handleAddNote(newNote) {
+  _handleAddNote(newNote) {
     // update firebase with the new notes
     let list = [ ...this.state.notes, { value:newNote } ];
     this.setState({notes:list});
@@ -54,7 +56,7 @@ class Profile extends React.Component {
         <Notes
           username={this.props.params.username}
           notes={this.state.notes}
-          addNote={this.handleAddNote.bind(this)}
+          addNote={this.handleAddNote}
           />
       </div>
     </div>
