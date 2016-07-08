@@ -1,23 +1,21 @@
 import React from 'react';
 
-class UserProfile extends React.Component {
-  render() {
-    return (
-      <div>
-        <h3>User Profile</h3>
-        {this.props.bios.avatar_url && <li className="list-group-item"> <img src={this.props.bios.avatar_url} className="img-rounded img-responsive"/></li>}
-        {this.props.bios.name && <li className="list-group-item">Name: {this.props.bios.name}</li>}
-        {this.props.bios.login && <li className="list-group-item">Username: {this.props.bios.login}</li>}
-        {this.props.bios.email && <li className="list-group-item">Email: {this.props.bios.email}</li>}
-        {this.props.bios.location && <li className="list-group-item">Location: {this.props.bios.location}</li>}
-        {this.props.bios.company && <li className="list-group-item">Company: {this.props.bios.company}</li>}
-        {this.props.bios.followers != 0 && <li className="list-group-item">Followers: {this.props.bios.followers}</li>}
-        {this.props.bios.following != 0 && <li className="list-group-item">Following: {this.props.bios.following}</li>}
-        {this.props.bios.public_repos != 0 && <li className="list-group-item">Public Repos: {this.props.bios.public_repos}</li>}
-        {this.props.bios.blog && <li className="list-group-item">Blog: <a href={this.props.bios.blog}> {this.props.bios.blog}</a></li>}
-      </div>
-    )
-  }
+const UserProfile = ({bios}) => {
+  return (
+    <div>
+      <h3>User Profile</h3>
+      {bios.avatar_url && <li className="list-group-item"> <img src={bios.avatar_url} className="img-rounded img-responsive"/></li>}
+      {bios.name && <li className="list-group-item">Name: {bios.name}</li>}
+      {bios.login && <li className="list-group-item">Username: {bios.login}</li>}
+      {bios.email && <li className="list-group-item">Email: {bios.email}</li>}
+      {bios.location && <li className="list-group-item">Location: {bios.location}</li>}
+      {bios.company && <li className="list-group-item">Company: {bios.company}</li>}
+      {bios.followers != 0 && <li className="list-group-item">Followers: {bios.followers}</li>}
+      {bios.following != 0 && <li className="list-group-item">Following: {bios.following}</li>}
+      {bios.public_repos != 0 && <li className="list-group-item">Public Repos: {bios.public_repos}</li>}
+      {bios.blog && <li className="list-group-item">Blog: <a href={bios.blog}> {bios.blog}</a></li>}
+    </div>
+  )
 }
 
 UserProfile.propTypes = {
