@@ -1,18 +1,17 @@
 import React from 'react';
-import Router from 'react-router';
 import Repos from './Github/Repos.jsx';
 import UserProfile from './Github/UserProfile.jsx';
 import Notes from './Notes/Notes.jsx';
 import getGithubInfo from '../utils/helpers.jsx';
 
-import db from '../utils/firebase.jsx';
-import reactMixin from 'react-mixin';
-import ReactFireMixin from 'reactfire';
+import Rebase from 're-base';
+
+const base = Rebase.createClass('https://egghead-note-taker.firebaseio.com');
 
 class Profile extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       notes: [],
@@ -34,13 +33,17 @@ class Profile extends React.Component {
     console.log('-- nextProps:')
     console.log(nextProps);
 
-    this.unbind('notes');
+    // this.unbind('notes');
+    base.removeBinding(this.ref);
     this.init(nextProps.params.username);
   }
 
   _init(username) {
-    let userRef = db.notesRef.child(username);
-    this.bindAsArray(userRef, 'notes');
+    this.ref = base.bindToState(`notes/${username}`, {
+      context: this,
+      asArray: true,
+      state: 'notes'
+    })
 
     getGithubInfo(username)
       .then((data) => {
@@ -55,15 +58,14 @@ class Profile extends React.Component {
 
   componentWillUnmount() {
     // hooks to unbind go here
-    this.unbind('notes');
+    base.removeBinding(this.ref);
   }
 
   _handleAddNote(newNote) {
     // update firebase with the new notes
-    // let list = [ ...this.state.notes, { value:newNote } ];
-    // this.setState({notes:list});
-    let userRef = db.notesRef.child(this.props.params.username);
-    userRef.push(newNote);
+    base.post(`notes/${this.props.params.username}`, {
+      data: [ ...this.state.notes, newNote ]
+    });
   }
 
   render() {
@@ -86,7 +88,5 @@ class Profile extends React.Component {
     );
   }
 }
-
-reactMixin(Profile.prototype, ReactFireMixin);
 
 export default Profile;
