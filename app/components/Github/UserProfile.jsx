@@ -1,5 +1,9 @@
 import React from 'react';
 
+const chk4num = (val) => {
+  return (val != null && val > 0);
+}
+
 const UserProfile = ({bios}) => {
   return (
     <div>
@@ -10,9 +14,9 @@ const UserProfile = ({bios}) => {
       {bios.email && <li className="list-group-item">Email: {bios.email}</li>}
       {bios.location && <li className="list-group-item">Location: {bios.location}</li>}
       {bios.company && <li className="list-group-item">Company: {bios.company}</li>}
-      {bios.followers != 0 && <li className="list-group-item">Followers: {bios.followers}</li>}
-      {bios.following != 0 && <li className="list-group-item">Following: {bios.following}</li>}
-      {bios.public_repos != 0 && <li className="list-group-item">Public Repos: {bios.public_repos}</li>}
+      {chk4num(bios.followers) && <li className="list-group-item">Followers: {bios.followers}</li>}
+      {chk4num(bios.following) && <li className="list-group-item">Following: {bios.following}</li>}
+      {chk4num(bios.public_repos) && <li className="list-group-item">Public Repos: {bios.public_repos}</li>}
       {bios.blog && <li className="list-group-item">Blog: <a href={bios.blog}> {bios.blog}</a></li>}
     </div>
   )
