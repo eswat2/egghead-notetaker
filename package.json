@@ -1,12 +1,12 @@
 {
   "name": "egghead-notetaker-updates",
   "version": "1.0.0",
-  "description": "",
+  "description": "code for egghead.io course - Build Your First React.js App",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot"
   },
-  "author": "Tyler McGinnis <tylermcginnis33@gmail.com> (http://tylermcginnis.com)",
+  "author": "Richard Hess <eswat2@gmail.com> (http://about.me/richardhess)",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.12.0",
@@ -15,9 +15,7 @@
     "re-base": "^1.5.1",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
-    "react-mixin": "^3.0.5",
     "react-router": "^2.5.2",
-    "reactfire": "^1.0.0",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
