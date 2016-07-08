@@ -1,8 +1,8 @@
 import React from 'react';
 
 class AddNote extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.input = null;
 
     this.setRef = (ref) => this._setRef(ref);
